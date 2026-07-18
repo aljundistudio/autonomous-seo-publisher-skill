@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "site": {
+    "id": "example-site",
+    "base_url": "https://example.com",
+    "brand": "Example",
+    "languages": ["ar", "en"],
+    "timezone": "Asia/Riyadh"
+  },
+  "schedule": {
+    "enabled": true,
+    "time": "09:00",
+    "max_posts_per_local_date": 1,
+    "retry_minutes": 15
+  },
+  "providers": {
+    "text": {
+      "type": "openrouter",
+      "model": "replace-with-current-model-id",
+      "secret_env": "OPENROUTER_API_KEY"
+    },
+    "image": {
+      "type": "openrouter-images",
+      "model": "replace-with-current-image-model-id",
+      "secret_env": "OPENROUTER_API_KEY",
+      "format": "webp",
+      "aspect_ratio": "16:9"
+    }
+  },
+  "publishing": {
+    "mode": "atomic-release",
+    "root": "/var/www/example.com",
+    "current_link": "/var/www/example.com/current",
+    "releases_dir": "/var/www/example.com/releases",
+    "content_store": "/var/www/example.com/current/data/posts.json",
+    "cover_directory": "assets/posts",
+    "protected_files": ["google-verification.html"]
+  },
+  "commands": {
+    "build": ["node", "scripts/build.mjs"],
+    "build_sitemaps": ["node", "scripts/build-sitemaps.mjs"],
+    "verify": ["node", "scripts/verify-release.mjs"]
+  },
+  "safeguards": {
+    "lock_file": "/var/lock/example-seo-publisher.lock",
+    "atomic_activation": true,
+    "rollback_on_live_failure": true,
+    "require_raster_cover": true,
+    "preserve_previous_release": true
+  }
+}
