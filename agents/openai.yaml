@@ -1,0 +1,4 @@
+interface:
+  display_name: "Autonomous SEO Publisher"
+  short_description: "Create and publish verified SEO articles safely"
+  default_prompt: "Use $autonomous-seo-publisher to configure and run a safe automated SEO publishing workflow for my website."
